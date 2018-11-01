@@ -30,37 +30,43 @@
 
 # Questions to Answer
 
-
+######################################
 * **What is HTML? Describe in 1 or 2 brief sentences. (It's OK to quote something else if you want, but make sure you cite anything/anyone you quote from, and make sure you understand anyone else's words you use!)**
 
 HTML stands fot Hypertext Markup Language, which is a standard markup language for describing things, such as title, link, image, on World Wide Web pages.
 
 
+######################################
 * **Why might you find an `id=` in an HTML tag? (Describe in 1 sentence.)**
 
-The id value can be used by CSS and JavaScript to perform certain tasks for a unique element with the specified id value. The id global attribute defines a unique identifier (ID) which must be unique in the whole document. Its purpose is to identify the element when linking (using a fragment identifier), scripting, or styling (with CSS).
+id is a unique identifier (ID) specified in the html document, which could be called by its corresponding CSS and JavaScript to perform certain tasks for that unique element [1].
 
-https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
+[1] Id. (n.d.). Retrieved from https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id
 
 
-
+######################################
 * **Why might you find a `class=` in an HTML tag? (Describe in 1 sentence.)**
 
-The class is an attribute which specifies one or more class names for an HTML element. The class attribute can be used on any HTML element. The class name can be used by CSS and JavaScript to perform certain tasks for elements with the specified class name.
-https://www.geeksforgeeks.org/html-class-attribute/
+The class can be used on one or more html elements, as long as they share the same attributes, by calling the class name in its corresponding CSS and JavaScript [2].
+
+[2] HTML | Class Attribute. (2018, September 18). Retrieved from https://www.geeksforgeeks.org/html-class-attribute/
 
 
+######################################
 * **What is "scraping data from websites" in a program? (It is OK to quote a source or another person, but you should cite anything/anyone else you quote here, and you should make sure you understand what you quote.)**
 
-Web Scraping (also termed Screen Scraping, Web Data Extraction, Web Harvesting etc.) is a technique employed to extract large amounts of data from websites whereby the data is extracted and saved to a local file in your computer or to a database in table (spreadsheet) format. ata displayed by most websites can only be viewed using a web browser. They do not offer the functionality to save a copy of this data for personal use. The only option then is to manually copy and paste the data - a very tedious job which can take many hours or sometimes days to complete. Web Scraping is the technique of automating this process, so that instead of manually copying the data from websites, the Web Scraping software will perform the same task within a fraction of the time.
-https://www.webharvy.com/articles/what-is-web-scraping.html
+"Scraping data from websites" or simply "Web Scraping" is a technique employed to extract large amounts of data, instead of using the API provided by the website, but from website's explicit content. The data will be extracted and saved to a local file in a computer or to a database in table (spreadsheet) format [3]. 
+
+[3] S. (n.d.). WebHarvy Web Scraper. Retrieved from https://www.webharvy.com/articles/what-is-web-scraping.html
 
 
+######################################
 * **What is happening in this line of code: `soup = BeautifulSoup('<b class="boldest">Extremely bold</b>')` ? Describe VERY briefly. Or simply answer the following question: What type is the value of `soup` after that line executes?**
 
 a BeautifulSoup object
 
 
+######################################
 * **In the following code, what's any one thing that the values of `soup` and `tag_one` have in common? (note: "They're both values in Python code" is too general.)**
 
 ```py
@@ -71,6 +77,7 @@ tag = soup.b
 tag is a Tag object corresponds to an XML or HTML tag in the original document:
 
 
+######################################
 * **What kind of information can you find in a `BeautifulSoup Tag`'s `.attrs` attribute? e.g. if you ran the following code, what is 1 thing you might find out? (There are many possibilities, you need only answer one. But it will be useful to think about what `.attrs` is here, and whether or not you understand the following code!)** 
 
 ```py
@@ -79,44 +86,43 @@ print(sp.attrs)
 print(sp.attrs.keys())
 ```
 
+
+######################################
 * **How are the `BeautifulSoup` methods `.find` and `.find_all` different? What does each one return? Briefly, why might you use `.find_all` instead of `.find`? (HINT: Check out the *Searching the Tree* section of the documentation...)**
 
-The find_all() method looks through a tag’s descendants and retrieves all descendants that match the filters. The find_all() method scans the entire document looking for results, but sometimes you only want to find one result. If you know a document only has one <body> tag, it’s a waste of time to scan the entire document looking for more. Rather than passing in limit=1 every time you call find_all, you can use the find() method. These two lines of code are nearly equivalent: 
+The find_all() method scans the entire document, looks through a tag’s descendants and retrieves all descendants that match the filters. The find_all() returns a list containing the single result. If find_all() can’t find anything, it returns an empty list.
 
-```py
-soup.find_all('title', limit=1)
-soup.find('title') 
-```
-The only difference is that find_all() returns a list containing the single result, and find() just returns the result.
-If find_all() can’t find anything, it returns an empty list. If find() can’t find anything, it returns None
+The find() method returns the first descendants that the program finds. It just returns the result. If find() can’t find anything, it returns None. 
+
+If we already know that a document only have one tag we want, we can use find() method becasue it saves us time of scanning the whole document. However, if we wanna to get a list of result with the same sttribute or we are not sure if it is the only tag in a document, we should use the find_all() method to scan the entire document looking for more.
 
 
+
+######################################
 * **Is using the `BeautifulSoup` library the only way to do scraping in a Python program? If so, why is it the only way? If not, what other module options could you investigate for scraping using a Python program (list just 1 or 2)?**
 
 	* ***Consider:* Why might you want to use `BeautifulSoup` instead of another option, even if others exist? Why might you *not* want to use `BeautifulSoup`?**
 
-Python has several other options for HTML scraping in addition to BeatifulSoup. Here are some others:
-mechanize
-scrapemark
-scrapy
 
-it is easy and intuitive to work on. Scrapy is a rather big framework, it's not necessarily hard or complicated but sometimes a whole framework is not necessary to scrape some data. That's where BeautifulSoup comes in.
-So if you wish to scrape just few web page you should probably stick with requests library to retrieve the pages and BeautifulSoup to parse those pages for bits of data you need.  
-For more complicated crawls where you would need to crawl lots and lots of pages I would look into learning and using scrapy
+No, Python has several other options for HTML scraping in addition to BeatifulSoup, such as scrapy.
+
+Scrapy is a rather big framework. Though it's not necessarily hard or complicated, sometimes its whole framework is not necessary to scrape some data. Compare to Scrapy, BeautifulSoup is easy and intuitive to work on. Therefore, if we just want to scrape just few web page, BeautifulSoup can do a better job in terms of easy-to-use and efficiency. However, for more complicated crawls, such as lots and lots of pages, learning and using scrapy is preferred.
 
 https://www.quora.com/What-are-the-advantages-of-Scrapy-compared-to-Beautiful-Soup
 
 
+######################################
 * **Why is some form of caching important to perform when scraping data from web pages?**
 
-I often don't want to wait a few minutes for my computer to do something it already did 10 minutes ago. In cases like this, I've found caching the results of my scraping to disk to be a useful way to avoid re-doing work.
-++++++++++++++++++++++++++++++++++
+First, caching gets rid of the waiting time for requesting and processing data whenever developers try to test the code. In addition, caching greatly reduces the number we need to get access to the website, which lowers the possibility of forbidened by that website, or even legal issues.
 
+
+######################################
 * **Why would you scrape data rather than using an API to get data? What's an example of a situation in which you would want or need to use scraping techniques, specifically?**
 
-Availability: most of the sites have an API today. Yes, they do but more often than not there are many limitations on the data that is available through the API.
-Up-to-date: APIs tend to get updated very slowly because they are normally at the bottom of the priority list. The data served by the API may sometimes be old too. Instead, when you scrape the content off the website, you get what you see. You can easily verify this data.
-Rate Limits: Most APIs will have their own rate limits.
-Better Structure: Navigating through a badly structured API can be very tedious and time consuming. You might have to make dozens of queries before getting to the actual data that you need.
+1> Wev scraping enjoys larger data availability then using API. Though most of the sites have an API today, they often apply some limitations on the data that is available through the API.
+2> Wev scraping enjoys more up-to-date data. APIs tend to get updated very slowly because they are normally at the bottom of the priority list. The data served by the API may sometimes be old too. Instead, when we are scraping the content off the website, we can get what we see.
+3> Wev scraping is not restrained by rate Limits. Most APIs will have their own rate limits, which reduces developers' efficiency to get those data.
+4> Wev scraping often enjoys better Structure: In some cases, the data provided by API is badly structured, which turns our work to be tedious and time consuming. Developers might have to make dozens of queries before getting to the actual data that they need.
 
-https://www.grepsr.com/web-scraping-vs-api/
+Web Scraping vs API - Web Data Extraction. (2013, December 12). Retrieved from https://www.grepsr.com/web-scraping-vs-api/
