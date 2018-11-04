@@ -66,6 +66,7 @@ The class can be used on one or more html elements, as long as they share the sa
 a BeautifulSoup object
 
 
+
 ######################################
 * **In the following code, what's any one thing that the values of `soup` and `tag_one` have in common? (note: "They're both values in Python code" is too general.)**
 
@@ -73,8 +74,9 @@ a BeautifulSoup object
 soup = BeautifulSoup('<b class="boldest">Extremely bold</b>')
 tag = soup.b
 ```
-
-tag is a Tag object corresponds to an XML or HTML tag in the original document:
+print(soup) >>>>> <html><body><b class="boldest">Extremely bold</b></body></html>
+print(tag) >>>>> <b class="boldest">Extremely bold</b>
+They both have <b class="boldest">Extremely bold</b> part. 
 
 
 ######################################
@@ -82,17 +84,22 @@ tag is a Tag object corresponds to an XML or HTML tag in the original document:
 
 ```py
 sp = BeautifulSoup("<html><h1>Title Here</h1><a href="http://www.google.com">Link to Google...</a></html>")
-print(sp.attrs)
-print(sp.attrs.keys())
+print(sp.a.attrs)
+print(sp.a.attrs.keys())
 ```
+
+print(sp.attrs) >>>>> {'href': 'http://www.google.com'}
+print(sp.attrs.keys()) >>>>> dict_keys(['href'])
+
+.attrs attribute helps to find all the attributes of the specified tag and return them as a dictionary. And the keys() method returns a list of keys in that dictionary.
 
 
 ######################################
 * **How are the `BeautifulSoup` methods `.find` and `.find_all` different? What does each one return? Briefly, why might you use `.find_all` instead of `.find`? (HINT: Check out the *Searching the Tree* section of the documentation...)**
 
-The find_all() method scans the entire document, looks through a tag’s descendants and retrieves all descendants that match the filters. The find_all() returns a list containing the single result. If find_all() can’t find anything, it returns an empty list.
+The find_all() method scans the entire document, looks through a tag’s descendants and retrieves all descendants that match the filters. The find_all() returns an iterable object like this: <class 'bs4.element.ResultSet'>. If find_all() can’t find anything, it returns an empty list.
 
-The find() method returns the first descendants that the program finds. It just returns the result. If find() can’t find anything, it returns None. 
+The find() method returns the first descendants that the program finds. It just returns the result, a tag object like this: <class 'bs4.element.Tag'> If find() can’t find anything, it returns None. 
 
 If we already know that a document only have one tag we want, we can use find() method becasue it saves us time of scanning the whole document. However, if we wanna to get a list of result with the same sttribute or we are not sure if it is the only tag in a document, we should use the find_all() method to scan the entire document looking for more.
 
@@ -106,15 +113,15 @@ If we already know that a document only have one tag we want, we can use find() 
 
 No, Python has several other options for HTML scraping in addition to BeatifulSoup, such as scrapy.
 
-Scrapy is a rather big framework. Though it's not necessarily hard or complicated, sometimes its whole framework is not necessary to scrape some data. Compare to Scrapy, BeautifulSoup is easy and intuitive to work on. Therefore, if we just want to scrape just few web page, BeautifulSoup can do a better job in terms of easy-to-use and efficiency. However, for more complicated crawls, such as lots and lots of pages, learning and using scrapy is preferred.
+Scrapy is a rather big framework. Though it's not necessarily hard or complicated, sometimes its whole framework is not necessary to scrape some data. Compare to Scrapy, BeautifulSoup is easy and intuitive to work on [1]. Therefore, if we just want to scrape just few web page, BeautifulSoup can do a better job in terms of easy-to-use and efficiency. However, for more complicated crawls, such as lots and lots of pages, learning and using scrapy is preferred.
 
-https://www.quora.com/What-are-the-advantages-of-Scrapy-compared-to-Beautiful-Soup
+[1] https://www.quora.com/What-are-the-advantages-of-Scrapy-compared-to-Beautiful-Soup
 
 
 ######################################
 * **Why is some form of caching important to perform when scraping data from web pages?**
 
-First, caching gets rid of the waiting time for requesting and processing data whenever developers try to test the code. In addition, caching greatly reduces the number we need to get access to the website, which lowers the possibility of forbidened by that website, or even legal issues.
+First, caching gets rid of the waiting time for requesting data whenever developers try to test the code. In addition, caching greatly reduces the number to get access to the website, which lowers the possibility of forbidened by that website, or even related legal issues.
 
 
 ######################################
